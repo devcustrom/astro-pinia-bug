@@ -1,0 +1,39 @@
+---
+import { pinia } from "../store/pinia";
+import { useTestStore } from '../store/teststore'
+const testStore = useTestStore(pinia)
+testStore.arr = [
+	'testValue'
+]
+const statePinia = JSON.stringify(pinia.state.value)
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+		<script define:vars={{
+			statePinia
+		}}>
+			window.__INITIAL_STATE__ = statePinia
+		</script>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<ul>
+			{
+				testStore.arr.map(item => (
+					<li>{item}</li>
+				))
+			}
+		</ul>
+	</body>
+</html>
+<script>
+	import { pinia } from "../store/pinia";
+	import { useTestStore } from '../store/teststore'
+	console.log(useTestStore(pinia).arr)
+	pinia.state.value = JSON.parse(window.__INITIAL_STATE__ ?? '{}')
+</script>
