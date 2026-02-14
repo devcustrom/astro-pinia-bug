@@ -1,0 +1,27 @@
+---
+import { ClientRouter } from "astro:transitions"
+import { pinia } from "../store/pinia"
+
+const statePinia = JSON.stringify(pinia.state.value)
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+		<ClientRouter/>
+		<Fragment
+			set:html={`<script type="application/json" id="pinia-state">${statePinia}</script>`}
+		/>
+	</head>
+	<body>
+		<slot/>
+	</body>
+</html>
+<script>
+	import { pinia } from "../store/pinia";
+	import { useTestStore } from '../store/teststore'
+	console.log(useTestStore(pinia).arr)
+</script>

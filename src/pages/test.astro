@@ -5,7 +5,7 @@ import Layout from '../layouts/Main.astro'
 import { useTestStore } from '../store/teststore'
 const testStore = useTestStore(pinia)
 testStore.arr = [
-	'indexValue'
+	'testValue'
 ]
 ---
 <Layout>
@@ -17,5 +17,5 @@ testStore.arr = [
 			))
 		}
 	</ul>
-	<a href="/test">Test</a>
+	<a href="/">Index</a>
 </Layout>
