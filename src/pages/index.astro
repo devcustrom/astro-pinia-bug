@@ -1,9 +1,10 @@
 ---
 import { pinia } from "../store/pinia";
 import Layout from '../layouts/Main.astro'
-
+import Test from "../components/Test.vue";
 import { useTestStore } from '../store/teststore'
 const testStore = useTestStore(pinia)
+testStore.$reset()
 testStore.arr = [
 	'indexValue'
 ]
@@ -18,4 +19,7 @@ testStore.arr = [
 		}
 	</ul>
 	<a href="/test">Test</a>
+	<Test
+		client:load
+	/>
 </Layout>
