@@ -1,6 +1,7 @@
 ---
 import { getActivePinia } from "../store/pinia";
 import Layout from '../layouts/Main.astro'
+import { test } from '../store/customFile'
 import Test from "../components/Test.vue";
 import { useTestStore } from '../store/teststore'
 const pinia = await getActivePinia()
@@ -9,6 +10,11 @@ testStore.$reset()
 testStore.arr = [
 	'indexValue'
 ]
+const testpinia = await test()
+
+console.log(JSON.stringify(testpinia.state.value, null, '\t'));
+console.log(JSON.stringify(pinia.state.value, null, '\t'));
+
 ---
 <Layout>
 	<h1>Astro</h1>
