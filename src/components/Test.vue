@@ -1,12 +1,11 @@
 <template>
-	<pre>{{ obj }}</pre>
+	<pre>{{ arr }}</pre>
 </template>
 
 <script setup lang="ts">
 	import { storeToRefs } from 'pinia';
 import { useTestStore } from '../store/teststore'
 	const {
-		arr,
-		obj
+		arr
 	} = storeToRefs(useTestStore())
 </script>

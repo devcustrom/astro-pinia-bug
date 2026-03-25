@@ -1,8 +1,9 @@
 ---
-import { pinia } from "../store/pinia";
+import { getActivePinia } from "../store/pinia";
 import Layout from '../layouts/Main.astro'
 import Test from "../components/Test.vue";
 import { useTestStore } from '../store/teststore'
+const pinia = await getActivePinia()
 const testStore = useTestStore(pinia)
 testStore.$reset()
 testStore.arr = [

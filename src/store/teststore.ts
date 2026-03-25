@@ -12,7 +12,7 @@ export const useTestStore = defineStore('test', () => {
 			key: 'value'
 		}
 	}
-	console.log('test value: 123s')//replace 123 with your value
+	console.log('test value: 123')//replace 123 with your value
 	return {
 		$reset,
 		arr,
