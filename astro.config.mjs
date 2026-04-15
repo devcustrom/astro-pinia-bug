@@ -12,7 +12,7 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone'
   }),
-
+  trailingSlash: 'always',
   integrations: [
 		vue({
 			appEntrypoint: '/src/init'
