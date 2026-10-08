@@ -21,7 +21,9 @@ const statePinia = JSON.stringify(pinia.state.value)
 		<slot/>
 	</body>
 </html>
+
 <script>
-	import { pinia } from "../store/pinia";
-	import { useTestStore } from '../store/teststore'
+	document.addEventListener('astro:before-swap', (e) => {
+		if (e.to.pathname === e.from.pathname) e.swap = () => {}
+	})
 </script>

@@ -3,6 +3,7 @@ import Layout from '../layouts/Main.astro'
 ---
 <Layout>
 	<div class="grid items-center justify-center text-center gap-4">
+		<p id="query-value">Query param: <code>testvalue = {Astro.url.searchParams.get('testvalue') ?? 'none'}</code></p>
 		<button
 			id="update-push-default"
 			class="ring p-4 cursor-pointer"
@@ -11,6 +12,10 @@ import Layout from '../layouts/Main.astro'
 			id="update-push-fix"
 			class="ring p-4 cursor-pointer"
 		>Fix push state</button>
+		<button
+			id="update-navigate-replace"
+			class="ring p-4 cursor-pointer"
+		>navigate() with history: 'replace'</button>
 		<a
 			href="/returnPage/"
 			class="ring p-4"
@@ -20,6 +25,8 @@ import Layout from '../layouts/Main.astro'
 
 
 <script>
+	import { navigate } from "astro:transitions/client"
+
 	const pushUrlState = (url: string) => {
 		const state = history.state ?? { index: 0, scrollX: 0, scrollY: 0 }
 		history.pushState(
@@ -31,12 +38,16 @@ import Layout from '../layouts/Main.astro'
 	document.addEventListener('astro:page-load', () => {
 		const btnDefault = document.querySelector('#update-push-default')
 		const btnFix = document.querySelector('#update-push-fix')
+		const btnNavigateReplace = document.querySelector('#update-navigate-replace')
 		const testUrl = `?testvalue=true`
 		btnDefault?.addEventListener('click', () => {
 			history.pushState(null, '', testUrl)
 		})
 		btnFix?.addEventListener('click', () => {
 			pushUrlState(testUrl)
+		})
+		btnNavigateReplace?.addEventListener('click', () => {
+			navigate(testUrl, { history: 'replace' })
 		})
 	})
 </script>
