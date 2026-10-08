@@ -9,11 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "11.1.5",
-    "@astrojs/vue": "7.0.2",
+    "@astrojs/node": "11.1.7",
+    "@astrojs/vue": "7.0.3",
+    "@pinia/colada": "^1.4.7",
     "@tailwindcss/vite": "^4.3.2",
-    "astro": "^7.2.10",
-    "pinia": "^3.0.4",
+    "astro": "^7.3.7",
+    "pinia": "^4.0.3",
     "tailwindcss": "^4.3.2",
     "vue": "^3.5.28"
   }

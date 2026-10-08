@@ -2,7 +2,11 @@
 import { ClientRouter } from "astro:transitions"
 import { getActivePinia } from "../store/pinia"
 import '@styles/index.css'
+import { serializeQueryCache, useQueryCache } from "@pinia/colada"
 const pinia = await getActivePinia()
+const queryCache = useQueryCache(pinia)
+const stateColada = JSON.stringify(serializeQueryCache(queryCache))
+queryCache.caches.clear()
 const statePinia = JSON.stringify(pinia.state.value)
 ---
 <html lang="en">
@@ -15,6 +19,9 @@ const statePinia = JSON.stringify(pinia.state.value)
 		<ClientRouter/>
 		<Fragment
 			set:html={`<script type="application/json" id="pinia-state">${statePinia}</script>`}
+		/>
+		<Fragment
+			set:html={`<script type="application/json" id="colada-state">${stateColada}</script>`}
 		/>
 	</head>
 	<body>

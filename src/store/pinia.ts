@@ -1,5 +1,6 @@
 import { createPinia, type Pinia } from 'pinia'
 import { swapFunctions } from "astro:transitions/client";
+import { hydrateQueryCache, useQueryCache } from '@pinia/colada';
 
 export const pinia = import.meta.env.SSR ? null! : createPinia()
 
@@ -10,6 +11,18 @@ export const getActivePinia = async (): Promise<Pinia> => {
     } else {
         return pinia
     }
+}
+
+const saveColada = (doc: Document) => {
+	try {
+		const state = doc.getElementById('colada-state')?.textContent ?? ''
+		if (!state) return
+		const queryCache = useQueryCache(pinia)
+		if(!queryCache.caches.set) return
+		hydrateQueryCache(queryCache, JSON.parse(state))
+	} catch (e) {
+		console.log('[colada hydration]', e)
+	}
 }
 
 const save = (doc: Document) => {
@@ -47,4 +60,5 @@ if (!import.meta.env.SSR) {
 		}
 	})
 	save(document)
+	saveColada(document)
 }

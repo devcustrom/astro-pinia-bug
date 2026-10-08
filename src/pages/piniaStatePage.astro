@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Main.astro'
+import { useQueryCache } from '@pinia/colada'
+import { data } from '../data/piniacolada'
+import PiniaColadaComponent from '../components/PiniaColadaComponent.vue'
+import { getActivePinia } from '../store/pinia'
+
+const pinia = await getActivePinia()
+const queryCache = useQueryCache(pinia)
+
+await Promise.all([
+	queryCache.refresh(queryCache.ensure({
+		query: async () => {
+			return data
+		},
+		key: ['test']
+	}))
+])
+---
+<Layout>
+	<div class="text-center flex items-center min-h-screen justify-center">
+		Look dev console
+		<PiniaColadaComponent
+			client:idle
+		/>
+	</div>
+</Layout>
